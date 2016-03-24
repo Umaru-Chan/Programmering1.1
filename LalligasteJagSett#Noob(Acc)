@@ -10,7 +10,7 @@ public class lol {
     loop();
   }
 
-  static void loop();
+  static void loop()
   {
 
 
