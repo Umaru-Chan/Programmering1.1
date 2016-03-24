@@ -6,9 +6,33 @@ import java.io.FileInputStream;
 import java.io.InputStream;
 
 public class lol {
-  public static void main(String[] args)
+  public static void main(String[] args) {
+    loop();
+  }
+
+  static void loop();
+  {
 
 
+    while (true)
+    {
+      try{
+        playSound("lmao/Hentai_Sound.wav");
+        Thread.sleep(1500);
+      }catch (Exception e){e.printStackTrace();}
+    }
+  }
+
+
+  static void playSound(String path) throws Exception
+  {
+    InputStream in = new FileInputStream(path);
+    AudioStream as = new AudioStream(in);
+    AudioPlayer.player.start(as);
+  }
+
+
+/**
           throws Exception {
 
     InputStream hentai = new FileInputStream("lmao/Hentai_Sound.wav");
@@ -56,6 +80,7 @@ public class lol {
     InputStream youlikethat = new FileInputStream("lmao/You_like_that.wav");
     AudioStream YouLikeThat = new AudioStream(youlikethat);
 
+
     while (true) {
       AudioPlayer.player.start(Swallow);
       AudioPlayer.sleep(1500);
@@ -71,6 +96,7 @@ public class lol {
       AudioPlayer.sleep(1000);
       AudioPlayer.player.start(Spank);
       AudioPlayer.sleep(1000);
+      AudioPlayer.player.stop(Spank);
       AudioPlayer.player.start(Shoulder);
       AudioPlayer.sleep(1500);
       AudioPlayer.player.start(YouLikeThat);
@@ -82,3 +108,5 @@ public class lol {
     }
   }
 }
+
+*/
