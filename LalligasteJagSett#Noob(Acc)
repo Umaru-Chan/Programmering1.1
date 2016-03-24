@@ -1,0 +1,84 @@
+import sun.audio.AudioPlayer;
+import sun.audio.AudioStream;
+
+
+import java.io.FileInputStream;
+import java.io.InputStream;
+
+public class lol {
+  public static void main(String[] args)
+
+
+          throws Exception {
+
+    InputStream hentai = new FileInputStream("lmao/Hentai_Sound.wav");
+    AudioStream Hentai = new AudioStream(hentai);
+
+    InputStream swallow = new FileInputStream("lmao/Swallow_my_cum.wav");
+    AudioStream Swallow = new AudioStream(swallow);
+
+    InputStream fuckyou = new FileInputStream("lmao/FUCKYOU.wav");
+    AudioStream FUCKYOU = new AudioStream(fuckyou);
+
+    InputStream slaves = new FileInputStream("lmao/Slaves_get_your_ass_back_here.wav");
+    AudioStream Slaves = new AudioStream(slaves);
+
+    InputStream turnmeon = new FileInputStream("lmao/That_turns_me_on.wav");
+    AudioStream TurnMeOn = new AudioStream(turnmeon);
+
+    InputStream takeitboy = new FileInputStream("lmao/Take_it_boy.wav");
+    AudioStream TakeItBoy = new AudioStream(takeitboy);
+
+    InputStream aah = new FileInputStream("lmao/AAAAAAAAAAAAAAH.wav");
+    AudioStream AAH = new AudioStream(aah);
+
+    InputStream likeembarrassingme = new FileInputStream("lmao/Like_embarrassing_me.wav");
+    AudioStream LikeEmbarrassingMe = new AudioStream(likeembarrassingme);
+
+    InputStream shoulder = new FileInputStream("lmao/Oh_my_shoulder.wav");
+    AudioStream Shoulder = new AudioStream(shoulder);
+
+    InputStream ohohah = new FileInputStream("lmao/Oh_Oh_Aaah_ah.wav");
+    AudioStream OhOhAh = new AudioStream(ohohah);
+
+    InputStream spank = new FileInputStream("lmao/Spank.wav");
+    AudioStream Spank = new AudioStream(spank);
+
+    InputStream thankyousir = new FileInputStream("lmao/Thank_you_sir.wav");
+    AudioStream ThankYouSir = new AudioStream(thankyousir);
+
+    InputStream yessir = new FileInputStream("lmao/Yes_sir.wav");
+    AudioStream YesSir = new AudioStream(yessir);
+
+    InputStream youlikechallenges = new FileInputStream("lmao/You_like_challenges.wav");
+    AudioStream YouLikeChallenges = new AudioStream(youlikechallenges);
+
+    InputStream youlikethat = new FileInputStream("lmao/You_like_that.wav");
+    AudioStream YouLikeThat = new AudioStream(youlikethat);
+
+    while (true) {
+      AudioPlayer.player.start(Swallow);
+      AudioPlayer.sleep(1500);
+      AudioPlayer.player.start(Hentai);
+      AudioPlayer.sleep(2000);
+      AudioPlayer.player.start(Slaves);
+      AudioPlayer.sleep(2500);
+      AudioPlayer.player.start(FUCKYOU);
+      AudioPlayer.sleep(1000);
+      AudioPlayer.player.start(TakeItBoy);
+      AudioPlayer.sleep(1000);
+      AudioPlayer.player.start(AAH);
+      AudioPlayer.sleep(1000);
+      AudioPlayer.player.start(Spank);
+      AudioPlayer.sleep(1000);
+      AudioPlayer.player.start(Shoulder);
+      AudioPlayer.sleep(1500);
+      AudioPlayer.player.start(YouLikeThat);
+      AudioPlayer.sleep(2000);
+      AudioPlayer.player.start(Spank);
+      AudioPlayer.sleep(23000);
+      AudioPlayer.player.start(TurnMeOn);
+
+    }
+  }
+}
