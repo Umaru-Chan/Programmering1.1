@@ -33,6 +33,9 @@ public class Main {
         panel.add(name, BorderLayout.NORTH);
         panel.add(next, BorderLayout.WEST);
         panel.add(songs[0]);
+        
+        songs[0].addActionListner(ae ->
+            bitchesAnitShit());
 
         next.addActionListener(ae ->
             songOne());
@@ -171,12 +174,23 @@ public class Main {
         streams.put(path, new AudioStream(in));
         AudioPlayer.player.start(streams.get(path));
     }
+    
     static void stopSound (String path) throws Exception {
         AudioPlayer.player.stop(streams.get(path));
     }
+    
     static void exitCancer (){
         System.exit(cancerExiter);
     }
+    
+    static void bitchesAnitShit() {
+      try {
+         playSound("lmao/BITCHES_AIN_SHIT.wav");
+         }catch (Exception e){
+         e.printStackTrace();
+         }
+    }
+    
     static void songOne() {
         try {
             playSound("lmao/Tutturuu_.wav");
