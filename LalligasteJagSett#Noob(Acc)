@@ -19,11 +19,12 @@ public class Main {
     static void loop()
 
     {
-
         JButton exit = new JButton("Force exit the cancer");
         JButton next = new JButton("Next song");
+        JButton songs[] = new JButton[10];
         JLabel song = new JLabel("Songs: ");
         JLabel name = new JLabel("");
+        songs[0] = new JButton("Bitches ani't shit");
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.CYAN);
@@ -31,6 +32,7 @@ public class Main {
         panel.add(song);
         panel.add(name, BorderLayout.NORTH);
         panel.add(next, BorderLayout.WEST);
+        panel.add(songs[0]);
 
         next.addActionListener(ae ->
             songOne());
