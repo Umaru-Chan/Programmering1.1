@@ -19,31 +19,24 @@ public class Main {
     static void loop()
 
     {
-        JButton exit = new JButton("Force exit the cancer");
-        JButton next = new JButton("Next song");
         JButton songs[] = new JButton[10];
+        JButton exit = new JButton("Force exit the cancer");
         JLabel song = new JLabel("Songs: ");
-        JLabel name = new JLabel("");
         songs[0] = new JButton("Bitches ani't shit");
+        songs[1] = new JButton("Cancer");
 
         JPanel panel = new JPanel();
-        panel.setBackground(Color.CYAN);
+        panel.setBackground(Color.GREEN);
         panel.add(exit);
         panel.add(song);
-        panel.add(name, BorderLayout.NORTH);
-        panel.add(next, BorderLayout.WEST);
-        panel.add(songs[0]);
+        panel.add(songs[0], BorderLayout.WEST);
+        panel.add(songs[1], BorderLayout.SOUTH);
         
-        songs[0].addActionListner(ae ->
-            bitchesAnitShit());
+        songs[0].addActionListner(ae -> new Thread(() -> bitchesAnitShit()).start());
 
-        next.addActionListener(ae ->
-            songOne());
+        songs[1].addActionListener(ae -> new Thread(() -> songOne()),start());
 
-
-        exit.addActionListener(ae ->
-                    System.exit(cancerExiter));
-
+        exit.addActionListener(ae -> System.exit(cancerExiter));
 
         JFrame frame = new JFrame("Cancer Maker 3000");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -55,118 +48,6 @@ public class Main {
         frame.setLocationRelativeTo(null);
         frame.add(panel);
         frame.setVisible(true);
-
-       // for (int i = 0; i < 1; i++) {
-       //     try {
-       //         playSound("lmao/Tutturuu_.wav");
-       //         playSound("lmao/Yumi_Matsutoya_-_Haru_yo_koi.wav");
-       //         name.setText("Yumi Matsutoya - Haru yo koi");
-       //         Thread.sleep(4000);
-       //         playSound("lmao/Swallow_my_cum.wav");
-       //         Thread.sleep(1500);
-       //         name.setText("\n Hentai Sounds");
-       //         playSound("lmao/Hentai_Sound.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(2000);
-       //         playSound("lmao/Slaves_get_your_ass_back_here.wav");
-       //         Thread.sleep(2500);
-       //         playSound("lmao/FUCKYOU.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Take_it_boy.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Spank.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(500);
-       //         name.setText("\n Slave Power");
-       //         playSound("lmao/_Slave_Power_mp3.wav");
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/FUCKYOU.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Boy_next_door.wav");
-       //         Thread.sleep(100);
-       //         playSound("lmao/Yes_sir.wav");
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/AAAAAAAAAAAAAAH.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Spank.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Oh_my_shoulder.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/You_like_that.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Yes_sir.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Take_it_boy.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/You_like_challenges.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/FUCKYOU.wav");
-       //         Thread.sleep(1000);
-       //         name.setText("ONE FUCK MAN");
-       //         playSound("lmao/ONE_FUCK_MAN.wav");
-       //         Thread.sleep(1000);
-       //         stopSound("lmao/_Slave_Power_mp3.wav");
-       //         playSound("lmao/Like_embarrassing_me.wav");
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(1000);
-       //         name.setText("");
-       //         name.setText("GACHI DOCTOR");
-       //         playSound("lmao/Kappa_Shorts_GACHI_DOCTOR_mp3.wav");
-       //         playSound("lmao/Oh_my_shoulder.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Slaves_get_your_ass_back_here.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Take_it_boy.wav");
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/FUCKYOU.wav");
-       //         playSound("lmao/Spank.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Tutturuu_.wav");
-       //         Thread.sleep(500);
-       //         stopSound("lmao/ONE_FUCK_MAN.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Take_it_boy.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/Spank.wav");
-       //         playSound("lmao/Take_it_boy.wav");
-       //         Thread.sleep(500);
-       //         playSound("lmao/FUCKYOU.wav");
-       //         playSound("lmao/You_like_that.wav");
-       //         Thread.sleep(1000);
-       //         playSound("lmao/Slaves_get_your_ass_back_here.wav");
-       //         Thread.sleep(1000);
-       //         name.setText("");
-       //         name.setText("ONE FUCK MAN");
-       //         playSound("lmao/ONE_FUCK_MAN.wav");
-       //         Thread.sleep(1000);
-       //         name.setText("Streamer sex party");
-       //         playSound("lmao/Kappa_Shorts_Streamer_Sex_Party.wav");
-       //         Thread.sleep(5000);
-       //         name.setText("FMALOWER");
-       //         playSound("lmao/FMALOWER_m.wav");
-       //         Thread.sleep(60000*2);
-       //         exitCancer();
-       //
-       //     } catch (Exception e) {
-       //         e.printStackTrace();
-       //     }
-       // }
     }
 
     static void playSound(String path) throws Exception {
@@ -177,10 +58,6 @@ public class Main {
     
     static void stopSound (String path) throws Exception {
         AudioPlayer.player.stop(streams.get(path));
-    }
-    
-    static void exitCancer (){
-        System.exit(cancerExiter);
     }
     
     static void bitchesAnitShit() {
