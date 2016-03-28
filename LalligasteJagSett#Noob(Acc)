@@ -24,6 +24,7 @@ public class Main {
         JLabel song = new JLabel("Songs: ");
         songs[0] = new JButton("Bitches ani't shit");
         songs[1] = new JButton("Cancer");
+        songs[2] = new JButton("Weeaboo);
 
         JPanel panel = new JPanel();
         panel.setBackground(Color.GREEN);
@@ -31,10 +32,13 @@ public class Main {
         panel.add(song);
         panel.add(songs[0], BorderLayout.WEST);
         panel.add(songs[1], BorderLayout.SOUTH);
+        panel.add(songs[2], BorderLayout.EAST);
         
         songs[0].addActionListner(ae -> new Thread(() -> bitchesAnitShit()).start());
 
-        songs[1].addActionListener(ae -> new Thread(() -> songOne()),start());
+        songs[1].addActionListener(ae -> new Thread(() -> songOne()).start());
+        
+        songs[2].addActionListener(ae -> new Thread(() -> Weeaboo()).start());
 
         exit.addActionListener(ae -> System.exit(cancerExiter));
 
@@ -67,6 +71,14 @@ public class Main {
          e.printStackTrace();
          }
     }
+    
+    static void Weeaboo() {
+    try {
+         playSound("lmao/WEEABOO_SONG.wav");
+         }catch (Exception e){
+         e.printStackTrace();
+         }
+      }
     
     static void songOne() {
         try {
