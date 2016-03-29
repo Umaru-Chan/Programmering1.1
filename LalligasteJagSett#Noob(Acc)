@@ -16,29 +16,60 @@ public class Main {
         loop();
     }
 
-    static void loop()
+    private static void loop()
 
     {
         JButton songs[] = new JButton[10];
         JButton exit = new JButton("Force exit the cancer");
-        JLabel song = new JLabel("Songs: ");
         songs[0] = new JButton("Bitches ani't shit");
         songs[1] = new JButton("Cancer");
-        songs[2] = new JButton("Weeaboo);
+        songs[2] = new JButton("Weeaboo");
+        songs[3] = new JButton("Let it go");
+        songs[4] = new JButton("Roasted");
+        songs[5] = new JButton("Gibe pusi");
+        songs[6] = new JButton("Kill Yourself");
+        songs[7] = new JButton("Pornrap");
 
-        JPanel panel = new JPanel();
-        panel.setBackground(Color.GREEN);
-        panel.add(exit);
-        panel.add(song);
-        panel.add(songs[0], BorderLayout.WEST);
-        panel.add(songs[1], BorderLayout.SOUTH);
-        panel.add(songs[2], BorderLayout.EAST);
+        JPanel panelCenter = new JPanel();
+        panelCenter.setBackground(Color.ORANGE);
+        panelCenter.add(songs[0]);
+        panelCenter.add(songs[3]);
+        panelCenter.add(songs[5]);
+        panelCenter.add(songs[6]);
+        panelCenter.add(songs[7]);
+
+        JPanel panelBottom = new JPanel();
+        panelBottom.setBackground(Color.CYAN);
+        panelBottom.add(exit);
+
+        JPanel panelTop = new JPanel();
+        panelTop.setBackground(Color.GREEN);
+        panelTop.add(songs[1]);
+
+        JPanel panelRight = new JPanel();
+        panelRight.setBackground(Color.BLUE);
+        panelRight.add(songs[2]);
+
+        JPanel panelLeft = new JPanel();
+        panelLeft.setBackground(Color.BLUE);
+        panelLeft.add(songs[4]);
         
         songs[0].addActionListner(ae -> new Thread(() -> bitchesAnitShit()).start());
 
-        songs[1].addActionListener(ae -> new Thread(() -> songOne()).start());
+        songs[1].addActionListener(ae -> new Thread(() -> Cancer()).start());
         
         songs[2].addActionListener(ae -> new Thread(() -> Weeaboo()).start());
+        
+        songs[3].addActionListener(ae -> new Thread(() -> Letitgo()).start());
+
+        songs[4].addActionListener(ae -> new Thread(() -> Roasted()).start());
+
+        songs[5].addActionListener(ae -> new Thread(() -> GibePusi()).start());
+
+        songs[6].addActionListener(ae -> new Thread(() -> KillYourself()).start());
+
+        songs[7].addActionListener(ae -> new Thread(() -> Pornrap()).start());
+
 
         exit.addActionListener(ae -> System.exit(cancerExiter));
 
@@ -79,8 +110,48 @@ public class Main {
          e.printStackTrace();
          }
       }
+      
+        static void Letitgo() {
+        try {
+            playSound("lmao/LET_IT_GO.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void Roasted() {
+        try {
+            playSound("lmao/Nigga_Roasted.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void GibePusi() {
+        try {
+            playSound("lmao/Gibe_pusi.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void KillYourself() {
+        try {
+            playSound("lmao/Kill_Yourself.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void Pornrap() {
+        try {
+            playSound("lmao/PORN_RAP.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
     
-    static void songOne() {
+    static void Cancer() {
         try {
             playSound("lmao/Tutturuu_.wav");
             playSound("lmao/Yumi_Matsutoya_-_Haru_yo_koi.wav");
