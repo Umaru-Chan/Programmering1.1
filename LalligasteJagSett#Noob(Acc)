@@ -19,8 +19,16 @@ public class Main {
     private static void loop()
 
     {
+        Icon i = new ImageIcon("lmao/Hentai_pic_1.jpg");
+        Icon ii = new ImageIcon("lmao/pusi.jpg");
+        Icon iii = new ImageIcon("lmao/image2.jpg");
+        Icon iiii = new ImageIcon("lmao/image3.jpg");
+        Icon iiiii = new ImageIcon("lmao/image4.jpg");
+        Icon iiiiii = new ImageIcon("lmao/image5.jpg");
+        Icon iiiiiii = new ImageIcon("lmao/image6.jpg");
+        Icon iiiiiiii = new ImageIcon("lmao/image7.jpg");
         JButton songs[] = new JButton[10];
-        JButton exit = new JButton("Force exit the cancer");
+        JButton exit = new JButton("Exit Cancer Town");
         songs[0] = new JButton("Bitches ani't shit");
         songs[1] = new JButton("Cancer");
         songs[2] = new JButton("Weeaboo");
@@ -29,11 +37,21 @@ public class Main {
         songs[5] = new JButton("Gibe pusi");
         songs[6] = new JButton("Kill Yourself");
         songs[7] = new JButton("Pornrap");
+        songs[0].setIcon(i);
+        songs[1].setIcon(ii);
+        songs[2].setIcon(iii);
+        songs[3].setIcon(iiii);
+        songs[4].setIcon(iiiii);
+        songs[5].setIcon(iiiiii);
+        songs[6].setIcon(iiiiiii);
+        songs[7].setIcon(iiiiiiii);
 
         JPanel panelCenter = new JPanel();
         panelCenter.setBackground(Color.ORANGE);
         panelCenter.add(songs[0]);
+        panelCenter.add(songs[2]);
         panelCenter.add(songs[3]);
+        panelCenter.add(songs[4]);
         panelCenter.add(songs[5]);
         panelCenter.add(songs[6]);
         panelCenter.add(songs[7]);
@@ -42,24 +60,12 @@ public class Main {
         panelBottom.setBackground(Color.ORANGE);
         panelBottom.add(exit);
 
-        JPanel panelTop = new JPanel();
-        panelTop.setBackground(Color.ORANGE);
-        panelTop.add(songs[1]);
-
-        JPanel panelRight = new JPanel();
-        panelRight.setBackground(Color.ORANGE);
-        panelRight.add(songs[2]);
-
-        JPanel panelLeft = new JPanel();
-        panelLeft.setBackground(Color.ORANGE);
-        panelLeft.add(songs[4]);
-        
-        songs[0].addActionListner(ae -> new Thread(() -> bitchesAnitShit()).start());
+        songs[0].addActionListener(ae -> new Thread(() -> BitchesAintShit()).start());
 
         songs[1].addActionListener(ae -> new Thread(() -> Cancer()).start());
-        
+
         songs[2].addActionListener(ae -> new Thread(() -> Weeaboo()).start());
-        
+
         songs[3].addActionListener(ae -> new Thread(() -> Letitgo()).start());
 
         songs[4].addActionListener(ae -> new Thread(() -> Roasted()).start());
@@ -70,21 +76,17 @@ public class Main {
 
         songs[7].addActionListener(ae -> new Thread(() -> Pornrap()).start());
 
-
         exit.addActionListener(ae -> System.exit(cancerExiter));
 
         JFrame frame = new JFrame("Cancer Maker 3000");
         frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         frame.setResizable(false);
-        Dimension dim = new Dimension(1000, 500);
+        Dimension dim = new Dimension(1000, 1000);
         frame.setMinimumSize(dim);
         frame.setMaximumSize(dim);
         frame.setPreferredSize(dim);
         frame.setLocationRelativeTo(null);
-        frame.add(panelTop, BorderLayout.NORTH);
         frame.add(panelBottom, BorderLayout.SOUTH);
-        frame.add(panelRight, BorderLayout.EAST);
-        frame.add(panelLeft, BorderLayout.WEST);
         frame.add(panelCenter, BorderLayout.CENTER);
         frame.setVisible(true);
     }
@@ -94,28 +96,28 @@ public class Main {
         streams.put(path, new AudioStream(in));
         AudioPlayer.player.start(streams.get(path));
     }
-    
+
     static void stopSound (String path) throws Exception {
         AudioPlayer.player.stop(streams.get(path));
     }
-    
-    static void bitchesAnitShit() {
-      try {
-         playSound("lmao/BITCHES_AIN_SHIT.wav");
-         }catch (Exception e){
-         e.printStackTrace();
-         }
+
+    static void BitchesAintShit() {
+        try {
+            playSound("lmao/BITCHES_AIN_SHIT.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
     }
-    
+
     static void Weeaboo() {
-    try {
-         playSound("lmao/WEEABOO_SONG.wav");
-         }catch (Exception e){
-         e.printStackTrace();
-         }
-      }
-      
-        static void Letitgo() {
+        try {
+            playSound("lmao/WEEABOO_SONG.wav");
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+    static void Letitgo() {
         try {
             playSound("lmao/LET_IT_GO.wav");
         } catch (Exception e) {
@@ -154,8 +156,8 @@ public class Main {
             e.printStackTrace();
         }
     }
-    
-    //Not Complete
+
+    //Not complete
     static void Cancer() {
         try {
             playSound("lmao/Tutturuu_.wav");
