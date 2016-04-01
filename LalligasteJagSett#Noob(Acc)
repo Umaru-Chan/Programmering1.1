@@ -39,19 +39,19 @@ public class Main {
         panelCenter.add(songs[7]);
 
         JPanel panelBottom = new JPanel();
-        panelBottom.setBackground(Color.CYAN);
+        panelBottom.setBackground(Color.ORANGE);
         panelBottom.add(exit);
 
         JPanel panelTop = new JPanel();
-        panelTop.setBackground(Color.GREEN);
+        panelTop.setBackground(Color.ORANGE);
         panelTop.add(songs[1]);
 
         JPanel panelRight = new JPanel();
-        panelRight.setBackground(Color.BLUE);
+        panelRight.setBackground(Color.ORANGE);
         panelRight.add(songs[2]);
 
         JPanel panelLeft = new JPanel();
-        panelLeft.setBackground(Color.BLUE);
+        panelLeft.setBackground(Color.ORANGE);
         panelLeft.add(songs[4]);
         
         songs[0].addActionListner(ae -> new Thread(() -> bitchesAnitShit()).start());
@@ -81,7 +81,11 @@ public class Main {
         frame.setMaximumSize(dim);
         frame.setPreferredSize(dim);
         frame.setLocationRelativeTo(null);
-        frame.add(panel);
+        frame.add(panelTop, BorderLayout.NORTH);
+        frame.add(panelBottom, BorderLayout.SOUTH);
+        frame.add(panelRight, BorderLayout.EAST);
+        frame.add(panelLeft, BorderLayout.WEST);
+        frame.add(panelCenter, BorderLayout.CENTER);
         frame.setVisible(true);
     }
 
@@ -151,6 +155,7 @@ public class Main {
         }
     }
     
+    //Not Complete
     static void Cancer() {
         try {
             playSound("lmao/Tutturuu_.wav");
