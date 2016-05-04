@@ -1,0 +1,409 @@
+import javax.swing.*;
+import java.awt.*;
+import java.lang.String;
+
+/**
+ * Created by Niklas on 2015-10-03.
+ * Klassiskt Ping Pong
+ * Brister i spelet är när/om bollen träffar paddeln från undersidan(och ovansidan)
+ * så studsar den igenom paddeln fram och tillbaks. Ibland när det händer
+ * studsar bollen mot andra sidan och den andra spelaren får ett poäng ändå.
+ * När man spelar mot någon så stannar paddeln om den andra försöker flytta på sin.
+ */
+public class NiklasPingPongV4 {
+  public static void main(String[] args) {
+    String width = JOptionPane.showInputDialog(null, "Välj storlek på fönstret i x-led");
+    String height = JOptionPane.showInputDialog(null, "Välj storlek på fönstret i y-led");
+    JOptionPane.showMessageDialog(null, "Du har valt bredd = " + width + " pixlar och höjd " + height + " pixlar");
+    //Popup fönster för hur många pixlar du har valt i x- och y-led.
+    int xWidth = Integer.parseInt(width);
+    int yHeight = Integer.parseInt(height);
+    //Gör om strängvärderna till int värde.
+    SimpleWindowMod w = new SimpleWindowMod(xWidth, yHeight, "Ping Pong");
+
+    int bollMx = (int) (Math.random() * 10) + 8;
+    int bollMy = (int) (Math.random() * 10) + 4;
+
+    //Hur bollen förflyttar(riktning) sig i x-led.
+    switch ((int) (Math.random() * 2)) {
+      case 1:
+        bollMx = -bollMx;
+    }
+
+    //Hur bollen förflyttar(riktning) sig i y-led.
+    switch ((int) (Math.random() * 2)) {
+      case 1:
+        bollMy = -bollMy;
+    }/** Obs. Dessa swith satser gäller när spelet börjar, sen under spelets
+     gång kommer det vara samma värde.
+     Eftersom de ligger utanför while satsen som kör spelet.
+     Värdet kommer bara att ändras när spelet/koden startas om. */
+    int startMeny = 1;
+    int s0 = 20, s1 = 15; //Två olika sidlängder på kvadrater.
+    int x = 0, y = 30; //Rörelse i pixlar, x- & y- led.
+    int vP = 0, hP = 0; //Poäng för vänster och höger sida.
+    int bollxStart = w.getWidth() / 2; //Vart ping pongs bollen börjar i fönstret i x-led.
+    int bollyStart = (w.getHeight() / 2) - 15; //Vart ping pongs bolleb börjar i y-led.
+    int pY = y;//Högra paddelns hastighet i y-led om man spelar mot datorn.
+    boolean spel = true;
+    boolean bot = true; //Datorn.
+    int restart;
+
+    //kvadrat för om man ska spela mot datorn eller inte
+    //i menyn options.
+    SquareMod botSq =
+            new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 20, s1);
+
+    //Kvadrater för den vänstra paddelns.
+    SquareMod paddel0 =
+            new SquareMod(0, w.getHeight() / 2 + 25, s0);
+    SquareMod paddel1 =
+            new SquareMod(0, w.getHeight() / 2 + 5, s0);
+    SquareMod paddel2 =
+            new SquareMod(0, w.getHeight() / 2 - 15, s0);
+    SquareMod paddel3 =
+            new SquareMod(0, w.getHeight() / 2 - 35, s0);
+
+    //Kvadrater för den högra Paddeln.
+    SquareMod paddel4 =
+            new SquareMod(w.getWidth() - 20, w.getHeight() / 2 + 25, s0);
+    SquareMod paddel5 =
+            new SquareMod(w.getWidth() - 20, w.getHeight() / 2 + 5, s0);
+    SquareMod paddel6 =
+            new SquareMod(w.getWidth() - 20, w.getHeight() / 2 - 15, s0);
+    SquareMod paddel7 =
+            new SquareMod(w.getWidth() - 20, w.getHeight() / 2 - 35, s0);
+
+    //Ping Pongs bollen.
+    SquareMod boll = new SquareMod(bollxStart, bollyStart, 30);
+
+    while (startMeny == 1) {
+      w.clear();
+      w.setLineColor(Color.blue);
+      //Pennan skriver "Avsluta" i fönstret.
+
+      //Instruktions menyn körs
+
+      //Spelet körs.
+      // while (mStart == 1) {
+      while (spel) {
+        w.clear();
+        w.setLineColor(Color.black);
+
+        //En linje i mitten av fönstret ritas.
+        w.moveTo(w.getWidth() / 2, 0);
+        w.lineTo(w.getWidth() / 2, w.getHeight());
+
+        //Kvadraterna för paddlarna och bollen ritas ut i fönstret.
+        paddel0.draw(w);
+        paddel1.draw(w);
+        paddel2.draw(w);
+        paddel3.draw(w);
+        paddel4.draw(w);
+        paddel5.draw(w);
+        paddel6.draw(w);
+        paddel7.draw(w);
+        boll.draw(w);
+        boll.move(bollMx, bollMy);
+
+        //Bollen studsar på y-axeln
+        if (boll.getY() + boll.getSide() >= w.getHeight()
+                || boll.getY() < 0) {
+          bollMy = -bollMy;
+        }
+
+        //Bollen studsar på vänstra paddeln.
+        if (boll.getX() <= paddel0.getX() + paddel0.getSide()
+                && boll.getY() <= paddel0.getY()
+                + paddel0.getSide()
+                && boll.getY()
+                + boll.getSide() >= paddel3.getY()) {
+          bollMx = -bollMx;
+        }
+
+        //Om man spelar mot datorn, rör sig högra paddeln med  ett
+        //bestämt värde.
+        if (bot) {
+          paddel4.move(x, pY);
+          paddel5.move(x, pY);
+          paddel6.move(x, pY);
+          paddel7.move(x, pY);
+        }
+        /** Jag behöver bara kolla när paddeln längst ner slår mot
+         * nederkanten och när den översta slår på kanten
+         * längst upp eftersom jag har satt alla fyra kvadraters
+         * y-move värde till samma.
+         */
+
+        //När den högra paddelns lägsta kvadrat möter nederkanten
+        //inverteras kvadraternas y-värde så de börjas flyttas uppåt.
+        if (((paddel4.getY() + paddel4.getSide()) >= w.getHeight())) {
+          pY = -pY;
+        }
+
+        //När den översta kvadraten på högra paddeln möter kanten
+        //längst upp. Invertera y-värdet igen.
+        if ((paddel7.getY() < 0)) {
+          pY = -pY;
+        }
+
+        //Bollen sudsar på högra paddeln.
+        if (boll.getX() + boll.getSide() >= w.getWidth() - 20
+                && boll.getY() >= paddel7.getY()
+                && boll.getY() <= (paddel4.getY()
+                + paddel4.getSide())) {
+          bollMx = -bollMx;
+        }
+
+        //Bollen slår i högerkanten så åker den tillbaks till mitten.
+        if (boll.getX() + boll.getSide() >= w.getWidth()) {
+          boll.move((bollxStart - boll.getX()),
+                  bollyStart - boll.getY());
+          vP++;
+        }
+
+        //Bollen slår i vänster kanten av fönstret så flyttas den
+        //tillbaks där den började.
+        if (boll.getX() + boll.getSide() <= 0) {
+          boll.move((bollxStart - boll.getX()),
+                  bollyStart - boll.getY());
+          hP++;
+        }
+
+        w.moveTo(w.getWidth() / 4, w.getHeight() / 40);
+        w.writeText("Poäng: " + vP);
+        //Skriver ut poäng + värdet för hP.
+
+        w.moveTo(w.getWidth() / 2
+                + (w.getWidth() / 6), w.getHeight() / 40);
+        w.writeText("Poäng: " + hP);
+        //Skriver ut poäng + värdet för vP.
+
+        //Du förlorar mot datorn.
+        if (hP == 10 && bot) {
+          w.clear();
+          spel = false;
+          restart = JOptionPane.showConfirmDialog(null, "Play Again?", "GAME OVER", JOptionPane.YES_NO_OPTION);
+          if (restart == JOptionPane.YES_OPTION)
+            spel = true;
+          hP = 0;
+          vP = 0;
+          if (restart == JOptionPane.NO_OPTION)
+            System.exit(1);
+        }
+
+        //Du vinner mot datorn.
+        if (vP == 10 && bot) {
+          w.clear();
+          spel = false;
+          restart = JOptionPane.showConfirmDialog(null, "Play Again?", "YOU WON", JOptionPane.YES_NO_OPTION);
+          if (restart == JOptionPane.YES_OPTION)
+            spel = true;
+          hP = 0;
+          vP = 0;
+          if (restart == JOptionPane.NO_OPTION)
+            System.exit(2);
+        }
+
+        //Spelare 2 vinner.
+        if (hP == 10 && !bot) {
+          w.clear();
+          spel = false;
+          restart = JOptionPane.showConfirmDialog(null, "Play Again?", "Player 2 WON", JOptionPane.YES_NO_OPTION);
+          if (restart == JOptionPane.YES_OPTION)
+            spel = true;
+          hP = 0;
+          vP = 0;
+          if (restart == JOptionPane.NO_OPTION)
+            System.exit(3);
+        }
+
+        //Spelare 1 vinner.
+        if (vP == 10 && !bot) {
+          w.clear();
+          spel = false;
+          restart = JOptionPane.showConfirmDialog(null, "Play Again?", "Player 1 WON", JOptionPane.YES_NO_OPTION);
+          if (restart == JOptionPane.YES_OPTION)
+            spel = true;
+          hP = 0;
+          vP = 0;
+          if (restart == JOptionPane.NO_OPTION)
+            System.exit(4);
+        }
+
+
+        //Flyttning för paddlarna.
+        w.waitForEvent();
+        switch (w.getKey()) {
+          //Upp (Vänstra paddeln.)
+          case 'w':
+          case 'W':
+            if (paddel0.getY() > (s0 * 3))
+              paddel0.move(x, -y);
+            if (paddel1.getY() > (s0 * 2))
+              paddel1.move(x, -y);
+            if (paddel2.getY() > s0)
+              paddel2.move(x, -y);
+            if (paddel3.getY() > 0)
+              paddel3.move(x, -y);
+            break;
+
+          //Ner (Vänstra Paddeln.)
+          case 's':
+          case 'S':
+            if (w.getHeight() - (paddel0.getY() + s0) >= y)
+              paddel0.move(x, y);
+            if (w.getHeight() - (paddel1.getY() + s0) >= (y + s0))
+              paddel1.move(x, y);
+            if (w.getHeight() - (paddel2.getY() + s0) >= y + (s0 * 2))
+              paddel2.move(x, y);
+            if (w.getHeight() - (paddel3.getY() + s0) >= y + (s0 * 3))
+              paddel3.move(x, y);
+            break;
+
+
+          //Upp (Högra Paddeln.)
+          case 'i':
+          case 'I':
+            if (paddel4.getY() > (s0 * 3) && (!bot))
+              paddel4.move(x, -y);
+            if (paddel5.getY() > (s0 * 2) && (!bot))
+              paddel5.move(x, -y);
+            if (paddel6.getY() > (s0) && (!bot))
+              paddel6.move(x, -y);
+            if (paddel7.getY() > 0 && (!bot))
+              paddel7.move(x, -y);
+            break;
+
+          //Ner (Högra Paddeln.)
+
+
+          case 'k':
+          case 'K':
+            if ((w.getHeight() - (paddel4.getY() + s0) >= y) && (!bot))
+              paddel4.move(x, y);
+            if ((w.getHeight() - (paddel5.getY() + s0) >= (y + s0)) && (!bot))
+              paddel5.move(x, y);
+            if ((w.getHeight() - (paddel6.getY() + s0) >= y + (s0 * 2)) && (!bot))
+              paddel6.move(x, y);
+            if ((w.getHeight() - (paddel7.getY() + s0) >= y + (s0 * 3)) && (!bot))
+              paddel7.move(x, y);
+            break;
+
+
+        }
+      }
+    }
+  }
+}
+
+
+//  private static void menyer(SimpleWindowMod w){
+//    SquareMod[] sq = new SquareMod[6];
+//    sq[0] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2, 15);
+//    sq[1] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 20, 15);
+//    sq[2] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 40, 15);
+//    sq[3] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 60, 15);
+//    sq[4] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2, 15);
+//    sq[5] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2, 15);
+//    sq[0].draw(w);
+//    sq[1].draw(w);
+//    sq[2].draw(w);
+//    sq[3].draw(w);
+//    int x = w.getMouseX();
+//    int y = w.getMouseY();
+//    boolean in;
+//    boolean op;
+//    boolean start;
+//    boolean bot;
+//
+//
+//    w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 - 15);
+//    w.writeText("Starta Spelet");
+//    //Pennan skriver "Start Spelet" i fönstret.
+//
+//    w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 + 15);
+//    w.writeText("Instruktioner");
+//    //Pennan skriver "Instruktioner" i fönstret.
+//
+//    w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 + 45);
+//    w.writeText("Options");
+//    //Pennan skriver "Options" i fönstret.
+//
+//    w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 + 75);
+//    w.writeText("Avsluta");
+//
+//    if (x >= sq[0].getX() && (x <= (sq[0].getX() + 15))
+//            && (y >= sq[0].getY() && (y <= (sq[0].getY() + 15)))) {
+//      op = true;
+//    }
+//
+//    // Ifall musen klickar på rutan bredvid kontroller,
+//    // öppnas instruktioner.
+//    if (x >= sq[1].getX() && (x <= (sq[1].getX() + 15)) && (y >= sq[1].getY() && (y <= (sq[1].getY() + 15)))) {
+//      in = true;
+//    }
+//
+//    // Ifall musen klicker på rutan brevid start, starta spelet.
+//    if (x >= sq[2].getX() && (x <= (sq[2].getX() + 15)) && (y >= sq[2].getY() && (y <= (sq[2].getY() + 15)))) {
+//      start = true;
+//    }
+//
+//    // Ifall musen klickar på rutan bredvid avsluta, stängs spelet ner.
+//    if (x >= sq[3].getX() && (x <= (sq[3].getX() + 15)) && (y >= sq[3].getY() && (y <= (sq[3].getY() + 15)))) {
+//      System.exit(0);
+//    }
+//    //while (op == true){
+//      w.clear();
+//      w.setLineColor(Color.black);
+//      sq[4].draw(w);
+//      sq[5].draw(w);
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2);
+//      w.writeText("Antal spelare 1 eller 2");
+//      w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 + 105);
+//      w.writeText("Tillbaka");
+//
+//      w.waitForMouseClick();
+//      if (w.getMouseX() >= sq[4].getX() && (w.getMouseX() <= (sq[4].getX() + 15))
+//              && (w.getMouseY() >= sq[4].getY() && (w.getMouseY() <= (sq[4].getY() + 15)))) {
+//        op = false;
+//
+//      }
+//
+//      if (w.getMouseX() >= sq[5].getX() && (w.getMouseX() <= (sq[5].getX() + 15))
+//              && (w.getMouseY() >= sq[5].getY() && (w.getMouseY() <= (sq[5].getY() + 15)))) {
+//        bot = false;
+//        w.moveTo(w.getWidth() / 2 + 30, w.getHeight() / 2 + 30);
+//        w.writeText("Bot avstängd / 2 spelare. ");
+//        w.delay(2000);
+//      }
+//
+//    }
+//    //while (in){
+//      w.setLineColor(Color.black);
+//      sq[4].draw(w);
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2 - 15);
+//      w.writeText("*Obs att som default spelar du som vänstra paddeln mot datorn*");
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2);
+//      w.writeText("Hej! Välkommen till Ping Pong!");
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2 + 15);
+//      w.writeText("Kontroller för vänstra paddeln: upp = w, ner = s");
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2 + 30);
+//      w.writeText("För den högra paddeln: upp = i, ner = k");
+//      w.moveTo(w.getWidth() / 2, w.getHeight() / 2 + 45);
+//      w.writeText("Om du vill spela mot någon: Gå till Options.");
+//      w.moveTo(w.getWidth() / 2 + 20, w.getHeight() / 2 + 105);
+//      w.writeText("Tillbaka");
+//
+//      w.waitForMouseClick();
+//      if (w.getMouseX() >= sq[4].getX() && (w.getMouseX() <= (sq[4].getX() + 15))
+//              && (w.getMouseY() >= sq[4].getY() && (w.getMouseY() <= (sq[4].getY() + 15)))) {
+//        in = false;
+//      }
+//    }
+//    while (start == true){
+//
+//    }
+//  }
+//}
+
