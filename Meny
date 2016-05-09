@@ -1,0 +1,146 @@
+import java.awt.*;
+
+/**
+ * Created by Niklas on 2016-05-04.
+ */
+public class Meny {
+    SimpleWindowMod w;
+    boolean bot;
+
+    public Meny(SimpleWindowMod w) {
+        this.w = w;
+    }
+
+    public void welcome() {
+        w.clear();
+        while (true) {
+            SquareMod[] sq = new SquareMod[6];
+            sq[0] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2, 15); //Starta
+            sq[1] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 20, 15); //Instruktioner
+            sq[2] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 40, 15); // Options
+            sq[3] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 60, 15); //Avsluta
+            sq[4] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2, 15); //Bot
+            sq[5] = new SquareMod(w.getWidth() / 2, w.getHeight() / 2 + 20, 15); //Tillbaka
+            sq[0].draw(w);
+            sq[1].draw(w);
+            sq[2].draw(w);
+            sq[3].draw(w);
+
+
+            w.moveTo(sq[0].getX() + 20, sq[0].getY() + 11);
+            w.writeText("Starta Spelet");
+            //Pennan skriver "Start Spelet" i fönstret.
+
+            w.moveTo(sq[1].getX() + 20, sq[1].getY() + 11);
+            w.writeText("Instruktioner");
+            //Pennan skriver "Instruktioner" i fönstret.
+
+            w.moveTo(sq[2].getX() + 20, sq[2].getY() + 11);
+            w.writeText("Options");
+            //Pennan skriver "Options" i fönstret.
+
+            w.moveTo(sq[3].getX() + 20, sq[3].getY() + 11);
+            w.writeText("Avsluta");
+
+            w.waitForMouseClick();
+            int x = w.getMouseX(), y = w.getMouseY();
+
+
+            if (x >= sq[0].getX() && (x <= (sq[0].getX() + sq[0].getSide())) && (y >= sq[0].getY() && (y <= (sq[0].getY() + sq[0].getSide())))) {
+                spel();
+            }
+
+            if (x >= sq[1].getX() && (x <= (sq[1].getX() + sq[1].getSide())) && (y >= sq[1].getY() && (y <= (sq[1].getY() + sq[1].getSide())))) {
+                instruktioner(sq);
+            }
+
+            if (x >= sq[2].getX() && (x <= (sq[2].getX() + sq[2].getSide())) && (y >= sq[2].getY() && (y <= (sq[2].getY() + sq[2].getSide())))) {
+                options(sq);
+            }
+
+            if (x >= sq[3].getX() && (x <= (sq[3].getX() + sq[3].getSide())) && (y >= sq[3].getY() && (y <= (sq[3].getY() + sq[3].getSide())))) {
+                System.exit(0);
+            }
+        }
+    }
+
+    private void options(SquareMod sq[]) {
+        w.clear();
+        while (true) {
+            w.setLineColor(Color.BLACK);
+            sq[4].draw(w);
+            sq[5].draw(w);
+            w.moveTo(sq[4].getX() + 20, sq[4].getY() + 11);
+            w.writeText("Stäng av bot");
+            w.moveTo(sq[5].getX() + 20, sq[5].getY() + 11);
+            w.writeText("Tillbaka");
+
+            w.waitForMouseClick();
+            int x = w.getMouseX(), y = w.getMouseY();
+
+            if (x >= sq[5].getX() && x <= sq[5].getX() + sq[5].getSide() && y >= sq[5].getY() && y <= sq[5].getY() + sq[5].getSide()){
+                welcome();
+            }
+
+            if (x >= sq[4].getX() && x <= sq[4].getX() + sq[4].getSide() && y >= sq[4].getY() && y <= sq[4].getY() + sq[4].getSide()){
+                bot = false;
+                w.moveTo(sq[4].getX(), sq[4].getY() - 5);
+                w.writeText("Bot Avstängd");
+                w.delay(1000);
+                w.clear();
+                if (!bot && x >= sq[4].getX() && x <= sq[4].getX() + sq[4].getSide() && y >= sq[4].getY() && y <= sq[4].getY() + sq[4].getSide()){
+                    bot = true;
+                }
+            }
+        }
+    }
+    private void instruktioner(SquareMod sq[]){
+        w.clear();
+        while (true){
+            w.setLineColor(Color.BLACK);
+            sq[5].draw(w);
+            w.moveTo(w.getWidth() / 2, w.getHeight() / 2 - 50);
+            w.writeText("Default spelar du mot bot. Se Options.");
+            w.moveTo(w.getWidth() / 2, w.getHeight() / 2);
+            w.writeText("Du flyttar högra paddeln med i och k.");
+            w.moveTo(w.getWidth() / 2, w.getHeight() / 2 + 10);
+            w.writeText("den vänstra w och s ( Upp och Ner )");
+            w.moveTo(sq[5].getX() + 20, sq[5].getY() + 11);
+            w.writeText("Tillbaka");
+
+            w.waitForMouseClick();
+            int x = w.getMouseX(), y = w.getMouseY();
+
+            if (x >= sq[5].getX() && x <= sq[5].getX() + sq[5].getSide() && y >= sq[5].getY() && y <= sq[5].getY() + sq[5].getSide()){
+                welcome();
+            }
+        }
+    }
+    private void spel(){
+        Rectangle l = new Rectangle(0, 0, 30, 120);
+        Rectangle r = new Rectangle(w.getWidth(), 0, -30, 120);
+        int bX = w.getWidth() / 2, bY = w.getHeight() / 2;
+        while (true){
+            w.clear();
+            w.moveTo(w.getWidth() / 2, 0);
+            w.lineTo(w.getWidth() / 2, w.getHeight());
+            r.move(0, 5);
+            l.move(0, 5);
+            r.draw(w);
+            l.draw(w);
+            circle(bX, bY, 30);
+            bX++;
+
+
+
+            w.delay(100);
+        }
+    }
+    private void circle(int x, int y, int r){
+        w.moveTo(x, y + r);
+        for (int i = 0; i < 360; i++) {
+            w.lineTo((int) (Math.sin(i) * r) + x, (int) (Math.cos(i) * r) + y);
+        }
+    }
+}
+
