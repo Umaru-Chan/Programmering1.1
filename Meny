@@ -117,30 +117,61 @@ public class Meny {
         }
     }
     private void spel(){
-        Rectangle l = new Rectangle(0, 0, 30, 120);
-        Rectangle r = new Rectangle(w.getWidth(), 0, -30, 120);
-        int bX = w.getWidth() / 2, bY = w.getHeight() / 2;
-        while (true){
-            w.clear();
-            w.moveTo(w.getWidth() / 2, 0);
-            w.lineTo(w.getWidth() / 2, w.getHeight());
-            r.move(0, 5);
-            l.move(0, 5);
-            r.draw(w);
-            l.draw(w);
-            circle(bX, bY, 30);
-            bX++;
+    Rectangle l = new Rectangle(0, 0, 30, 120);
+    Rectangle r = new Rectangle(w.getWidth(), 0, -30, 120);
+    Circle c = new Circle(w.getWidth() / 2, w.getHeight() / 2, 30);
+    int mX = 4, mY = -2;
+    while (true) {
+      w.clear();
+      w.moveTo(w.getWidth() / 2, 0);
+      w.lineTo(w.getWidth() / 2, w.getHeight());
+      r.draw(w);
+      l.draw(w);
+      c.draw(w);
+
+      c.move(mX, mY);
+
+      w.waitForEvent();
+      switch (w.getKey()) {
+        case 'w': dir1 = 1;
+          break;
+        case 's': dir1 = 2;
+          break;
+        case 'o': dir2 = 1;
+          break;
+        case 'l': dir2 = 2;
+          break;
+      }
 
 
+      if (dir2 > 0) {
+        if (r.getY() - 2 > 0 && dir2 == 1)
+          r.move(0, -5);
+        else if (r.getY() + 4 + r.getHeight() <= w.getHeight() && dir2 == 2)
+          r.move(0, 5);
+      }
+      if (dir1 > 0) {
+        if (l.getY() - 2 > 0 && dir1 == 1)
+          l.move(0, -5);
+        else if (l.getY() + 4 + l.getHeight() <= w.getHeight() && dir1 == 2)
+          l.move(0, 5);
+      }
 
-            w.delay(100);
-        }
+      if (c.getX() + c.getR() < r.getX() + r.getWidth() && c.getY() <= r.getY() + r.getHeight() && c.getY() + c.getR() >= r.getY()) {
+        mX = -mX;
+      }
+
+      if (c.getY() + c.getR() >= w.getHeight() || c.getY() - c.getR() <= 0) {
+        mY = -mY;
+      }
+
+      if (c.getX() + c.getR() <= 0){
+        c.move(w.getWidth() / 2 - c.getX(), w.getHeight() / 2 - c.getY());
+      }
+
+      if (c.getX() - c.getR() >= w.getWidth()){
+        c.move(w.getWidth() / 2 - c.getX(), w.getHeight() / 2 - c.getY());
+      }
     }
-    private void circle(int x, int y, int r){
-        w.moveTo(x, y + r);
-        for (int i = 0; i < 360; i++) {
-            w.lineTo((int) (Math.sin(i) * r) + x, (int) (Math.cos(i) * r) + y);
-        }
-    }
+  }
 }
-
