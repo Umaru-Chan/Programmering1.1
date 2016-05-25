@@ -6,6 +6,7 @@ import java.awt.*;
 public class Meny {
     SimpleWindowMod w;
     boolean bot;
+    private int dir1 = 0, dir2 = 0;
 
     public Meny(SimpleWindowMod w) {
         this.w = w;
