@@ -1,3 +1,13 @@
+/**
+ * 
+ * @author Niklas
+ * @version 1
+ * 
+ * Klassen gör rektanglar som jag använder i spelet Ping Pong för att det är lite lättare att använda än kvadrater
+ * och ser bättre ut.
+ * 
+ * Används också för meny valen.
+ */
 public class Rectangle {
 	SimpleWindowMod w;
     int x, y, width, height;
