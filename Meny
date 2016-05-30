@@ -1,5 +1,19 @@
 import javax.swing.JOptionPane;
-
+/**
+ * 
+ * @author Niklas
+ * @version 5.0
+ * 
+ * Klassen Meny innehåller metoderna för att välja olika alternativ och visa instruktionerna samt metoden som kör spelet.
+ * 
+ * Spelet är ett vanligt Ping Pong där den som kommer till 10 poäng först vinner. 
+ * 
+ * Buggar: Om man flyttar rektanglarna upp i bollen kommer rektangeln åka igenom bollen och bollen kommer förmodliga studsa lite fram och tillbaks innan
+ * den åker utanför och ger den andra spelaren poäng. Spelet flimrar vilket är ett fel som inte går att fixa för att det är  SimpleWindowMods "fel".
+ * Om man håller in en av kontrollerna kommer spelet gå fortare och se bättre ut och det är för att w.waitforevent har en delay.
+ * 
+ * Boten åker en del utanför nedrekanten av fönstret, men den kan dock inte missa bollen("Smart" Bot).  
+ */
 public class Meny {
 	SimpleWindowMod w;
 	boolean bot, DT, spel = true;
@@ -8,13 +22,17 @@ public class Meny {
 	public Meny(SimpleWindowMod w){
 		this.w = w;
 	}
+	/**
+	 * Metoden welcome anropar de andra metoderna när man väljer det
+	 */
 	public void welcome() {
 		w.clear();
 		while (true) {
 			
 			/**
 			 * Lägger till sex rektanglar som används i menyerna
-			 * Anävnder en array och inte en arraylist för listan kommer inte öka eller minska 
+			 * Anävnder en array och inte en arraylist för listan kommer inte öka eller minska
+			 * Skriver upp de olika meny valen i SimpleWindowMod fönstret 
 			 */
 			Rectangle[] rec = new Rectangle[6];
 			rec[0] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2, 100, 15);
@@ -65,6 +83,11 @@ public class Meny {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param rec Rektanglar som jag tilldelade i en vektor 
+	 * Visar i SimpleWindow fönstret vilka alternativ som är på och inte
+	 */
 	private void options(Rectangle rec[]) {
 		w.clear();
 		while (true) {
@@ -118,6 +141,11 @@ public class Meny {
 			}
 		}
 	}
+	/**
+	 * 
+	 * @param rec Rektanglar som jag tilldelade i en vektor
+	 * Rensar fönstret och skriver upp i SimpleWindowMod hur spelet funkar
+	 */
 	private void instruktioner(Rectangle rec[]){
 		w.clear();
 		while (true){
@@ -140,6 +168,12 @@ public class Meny {
 			}
 		}
 	}
+	/**
+	 * Den här metoden skapar först rektanglarna och bollen som ska vara med och sätter värden på bollen riktning
+	 * sen kommer den till while loopen som kommer spela spelet tills någon har vunnit och då kommer en dialog ruta som frågar
+	 * om man vill köra igen eller avsluta spelet.
+	 * 
+	 */
 	private void spel(){
 		
 		int mX = 5, mY = -1, restart;
