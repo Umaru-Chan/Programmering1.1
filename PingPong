@@ -1,3 +1,13 @@
+/**
+ * 
+ * @author Niklas
+ * @version 1
+ * 
+ * Den här klassen kallar på Meny och ritar ut metoden welcome i fönstret w, från klassen Meny.
+ * 
+ * Jag har gjort fönstret till en bestämd storlek för att det blir lättare och skappar inte massa strul med inmatning och sådant.
+ * Jag funderade på att göra så att men får välja men gjorde inte det.
+ */
 public class PingPong {
 	public static void main(String[] args) {
 		SimpleWindowMod w = new SimpleWindowMod(1000, 700, "Ping Pong");
