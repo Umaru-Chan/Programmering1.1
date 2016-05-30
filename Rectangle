@@ -1,0 +1,47 @@
+public class Rectangle {
+	SimpleWindowMod w;
+    int x, y, width, height;
+
+    /**
+     * 
+     * @param x rektangelns start i x-led
+     * @param y rektangelns start i y-led
+     * @param width rektangelns bredd
+     * @param height rektangelns höjd
+     */
+    public Rectangle(int x, int y, int width, int height){
+        this.x = x;
+        this.y = y;
+        this.width = width;
+        this.height = height;
+    }
+
+    public void draw(SimpleWindowMod w){
+        w.moveTo(x , y);
+        w.lineTo(x , y+height);
+        w.lineTo(x+width , y+height);
+        w.lineTo(x+width, y);
+        w.lineTo(x,y);
+    }
+
+    public int getX(){
+        return x;
+    }
+
+    public int getY(){
+        return y;
+    }
+
+    public int getWidth(){
+        return width;
+    }
+
+    public int getHeight(){
+        return height;
+    }
+
+    public void move(int mX, int mY){
+        x = x + mX;
+        y = y + mY;
+    }
+}
