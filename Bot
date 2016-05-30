@@ -1,7 +1,19 @@
+/**
+ * 
+ * @author Niklas
+ * @version 1
+ * 
+ * Klassen Bot skapar en bot som använder sig av metoden move för att flytta på bestämd rektangle.
+ */
 public class Bot {
 	SimpleWindowMod w;
 	Rectangle rec;
 	
+	/**
+	 * 
+	 * @param w vilket fönster den ska användas i.
+	 * @param rec vilken rektangel den ska flytta på.
+	 */
 	public Bot(SimpleWindowMod w, Rectangle rec){
 		this.rec = rec;
 		this.w = w;
@@ -9,6 +21,7 @@ public class Bot {
 	/**
 	 * 
 	 * @param by bollens y-värde
+	 * Bestämmer rektanglens y-värde negativt eller positivt beroende om rektangelns y-värde är större eller mindre än bollens.
 	 */
 	public void move(int by){
 		int dy = rec.getY() - by;
