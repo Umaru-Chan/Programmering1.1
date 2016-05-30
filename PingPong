@@ -1,0 +1,6 @@
+public class PingPong {
+	public static void main(String[] args) {
+		SimpleWindowMod w = new SimpleWindowMod(1000, 700, "Ping Pong");
+		new Meny(w).welcome();
+	}
+}
