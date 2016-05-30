@@ -1,0 +1,258 @@
+import javax.swing.JOptionPane;
+
+public class Meny {
+	SimpleWindowMod w;
+	boolean bot, DT, spel = true;
+	private int dir1 = 0, dir2 = 0, vP, hP;
+
+	public Meny(SimpleWindowMod w){
+		this.w = w;
+	}
+	public void welcome() {
+		w.clear();
+		while (true) {
+			
+			/**
+			 * Lägger till sex rektanglar som används i menyerna
+			 * Anävnder en array och inte en arraylist för listan kommer inte öka eller minska 
+			 */
+			Rectangle[] rec = new Rectangle[6];
+			rec[0] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2, 100, 15);
+			rec[1] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2 + 20, 100, 15);
+			rec[2] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2 + 40, 100, 15);
+			rec[3] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2 + 60, 100, 15);
+			rec[4] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2, 100, 15);
+			rec[5] = new Rectangle(w.getWidth() / 2, w.getHeight() / 2 + 100, 100, 15);
+			rec[0].draw(w);
+			rec[1].draw(w);
+			rec[2].draw(w);
+			rec[3].draw(w);
+
+
+			w.moveTo(rec[0].getX() + 5, rec[0].getY() + 12);
+			w.writeText("Starta Spelet");
+			//Pennan skriver "Start Spelet" i fönstret.
+
+			w.moveTo(rec[1].getX() + 5, rec[1].getY() + 12);
+			w.writeText("Instruktioner");
+			//Pennan skriver "Instruktioner" i fönstret.
+
+			w.moveTo(rec[2].getX() + 5, rec[2].getY() + 12);
+			w.writeText("Options");
+			//Pennan skriver "Options" i fönstret.
+
+			w.moveTo(rec[3].getX() + 5, rec[3].getY() + 12);
+			w.writeText("Avsluta");
+
+			w.waitForMouseClick();
+			int x = w.getMouseX(), y = w.getMouseY();
+
+			//Kollar om musklick är inannför någon av rektanglarna
+			if (x >= rec[0].getX() && (x <= (rec[0].getX() + rec[0].getWidth())) && (y >= rec[0].getY() && (y <= (rec[0].getY() + rec[0].getHeight())))) {
+				spel();
+			}
+
+			if (x >= rec[1].getX() && (x <= (rec[1].getX() + rec[1].getWidth())) && (y >= rec[1].getY() && (y <= (rec[1].getY() + rec[1].getHeight())))) {
+				instruktioner(rec);
+			}
+
+			if (x >= rec[2].getX() && (x <= (rec[2].getX() + rec[2].getWidth())) && (y >= rec[2].getY() && (y <= (rec[2].getY() + rec[2].getHeight())))) {
+				options(rec);
+			}
+
+			if (x >= rec[3].getX() && (x <= (rec[3].getX() + rec[3].getWidth())) && (y >= rec[3].getY() && (y <= (rec[3].getY() + rec[3].getHeight())))) {
+				System.exit(0);
+			}
+		}
+	}
+	private void options(Rectangle rec[]) {
+		w.clear();
+		while (true) {
+			rec[3].draw(w);
+			rec[4].draw(w);
+			rec[5].draw(w);
+			w.moveTo(rec[4].getX() + 20, rec[4].getY() + 11);
+			w.writeText("Stäng av bot");
+			w.moveTo(rec[5].getX() + 20, rec[5].getY() + 11);
+			w.writeText("Tillbaka");
+			w.moveTo(rec[3].getX() + 20, rec[3].getY() + 11);
+			w.writeText("Double Time");
+
+			w.waitForMouseClick();
+			int x = w.getMouseX(), y = w.getMouseY();
+
+			if (x >= rec[5].getX() && x <= rec[5].getX() + rec[5].getWidth() && y >= rec[5].getY() && y <= rec[5].getY() + rec[5].getHeight()){
+				welcome();
+			}
+
+			if (x >= rec[4].getX() && x <= rec[4].getX() + rec[4].getWidth() && y >= rec[4].getY() && y <= rec[4].getY() + rec[4].getHeight()){
+				bot = !bot;
+			}
+			
+			if (x >= rec[3].getX() && x <= rec[3].getX() + rec[3].getWidth() && y >= rec[3].getY() && y <= rec[3].getY() + rec[3].getHeight()){
+				DT = !DT;
+			}
+			
+			/**
+			 * Visar vad som är på och av
+			 */
+			w.clear();        
+			if (bot){
+				w.moveTo(rec[4].getX() + 110, rec[4].getY() + 10);
+				w.writeText("Bot på");
+			}
+
+			if (!bot){
+				w.moveTo(rec[4].getX() + 110, rec[4].getY() + 10);
+				w.writeText("Bot av");
+			}
+			
+			if (DT){
+				w.moveTo(rec[3].getX() + 110,  rec[3].getY() + 10);
+				w.writeText("Double Time på");
+			}
+			
+			if (!DT){
+				w.moveTo(rec[3].getX() + 110,  rec[3].getY() + 10);
+				w.writeText("Double Time av");
+			}
+		}
+	}
+	private void instruktioner(Rectangle rec[]){
+		w.clear();
+		while (true){
+			rec[5].draw(w);
+			w.moveTo(w.getWidth() / 2, w.getHeight() / 2 - 20);
+			w.writeText("Default spelar du inte mot en bot. Se Options.");
+			w.moveTo(w.getWidth() / 2, w.getHeight() / 2);
+			w.writeText("Du flyttar högra paddeln med o och l.");
+			w.moveTo(w.getWidth() / 2, w.getHeight() / 2 + 11);
+			w.writeText("Den vänstra w och s ( Upp och Ner )");
+			w.moveTo(rec[5].getX() + 20, rec[5].getY() + 11);
+			w.writeText("Tillbaka");
+
+			w.waitForMouseClick();
+			int x = w.getMouseX(), y = w.getMouseY();
+
+			//Om mus klicket är innanför rektangeln
+			if (x >= rec[5].getX() && x <= rec[5].getX() + rec[5].getWidth() && y >= rec[5].getY() && y <= rec[5].getY() + rec[5].getHeight()){
+				welcome();
+			}
+		}
+	}
+	private void spel(){
+		
+		int mX = 5, mY = -1, restart;
+		String playerOne = Integer.toString(vP);
+		String playerTwo = Integer.toString(hP);
+		
+		Rectangle scoreBoard = new Rectangle(w.getWidth() / 3, 0, w.getWidth() / 3, 20);
+		Rectangle left = new Rectangle(0, 0, 30, 120);
+		Rectangle right = new Rectangle(w.getWidth(), 0, -30, 120);
+		Circle c = new Circle(w.getWidth() / 2, w.getHeight() / 2, 25);
+		
+		if (DT){
+			mX *= 2;
+		}
+		
+		while (spel) {
+			w.clear();
+			w.moveTo(w.getWidth() / 2, 0);
+			w.lineTo(w.getWidth() / 2, w.getHeight());
+			right.draw(w);
+			left.draw(w);
+			c.draw(w);
+			c.move(mX, mY);
+			scoreBoard.draw(w);
+			w.moveTo(w.getWidth() / 3 + 10, 15);
+			w.writeText("Spelare 1 poäng: " + playerOne);
+			w.moveTo(w.getWidth() / 2 + 10, 15);
+			w.writeText("Spelare 2 poäng: " + playerTwo);
+			
+
+			w.waitForEvent();
+			switch (w.getKey()) {
+			case 'w': dir1 = 1;
+			break;
+			case 's': dir1 = 2;
+			break;
+			case 'o': dir2 = 1;
+			break;
+			case 'l': dir2 = 2;
+			break;
+			}
+		
+			//Höger rektangels förflyttning
+			if (dir2 > 0) {
+				if (right.getY() - 2 > 0 && dir2 == 1)
+					right.move(0, -5);
+				else if (right.getY() + 4 + right.getHeight() <= w.getHeight() && dir2 == 2)
+					right.move(0, 5);
+			}
+			
+			// Vänster rektangels förflyttning
+			if (dir1 > 0 && !bot) {
+				if (left.getY() - 2 > 0 && dir1 == 1)
+					left.move(0, -5);
+				else if (left.getY() + 4 + left.getHeight() <= w.getHeight() && dir1 == 2)
+					left.move(0, 5);
+			}
+	
+			//Vänster rektangels förflttning om boten är på
+			if (bot){
+				new Bot(w, left).move(c.getY() - c.getR());
+			}
+			
+			//Om höger spelare vinner kommer frågan för att spela igen eller inte
+			if (hP == 10){
+				spel = false;
+				w.clear();
+				restart = JOptionPane.showConfirmDialog(null,  "Play again?", "Spelare 2 vann", JOptionPane.YES_NO_CANCEL_OPTION);
+				if (restart == JOptionPane.YES_OPTION){
+					spel();
+				} else
+					System.exit(0);
+			}
+			
+			//Om vänster spelare vinner 
+			if (vP == 10){
+				spel = false;
+				w.clear();
+				restart = JOptionPane.showConfirmDialog(null,  "Play again?", "Spelare 1 vann", JOptionPane.YES_NO_CANCEL_OPTION);
+				if (restart == JOptionPane.YES_OPTION){
+					spel();
+				} else
+					System.exit(0);
+			}
+
+			//Om bollen träffar den högra rektanglen
+			if (c.getX() + c.getR() >= right.getX() + right.getWidth() && c.getY() - c.getR() >= right.getY() && c.getY() + c.getR() <= right.getY() + right.getHeight()){
+				mX = -mX;
+			}
+			
+			//Om bollen träffar vänstra rektanglen
+			if (c.getX() - c.getR() <= left.getX() + left.getWidth() && c.getY() - c.getR() >= left.getY() && c.getY() + c.getR() <= left.getY() + left.getHeight()){
+				mX = -mX;
+			}
+
+			//Om den träffar nedre eller övre sidan av fönstret
+			if (c.getY() + c.getR() >= w.getHeight() || c.getY() - c.getR() <= 0) {
+				mY = -mY;
+			}
+
+			//Om den åker utanför vänsterkanten, ger högra sidan 1 poäng
+			if (c.getX() + c.getR() <= 0){
+				c.move(w.getWidth() / 2 - c.getX(), w.getHeight() / 2 - c.getY());
+				hP++;
+				playerTwo = Integer.toString(hP);
+			}
+
+			//Om den åker utanför högerkanten, ger vänstra sidan 1 poäng
+			if (c.getX() - c.getR() >= w.getWidth()){
+				c.move(w.getWidth() / 2 - c.getX(), w.getHeight() / 2 - c.getY());
+				vP++;
+				playerOne = Integer.toString(vP);
+			}
+		}
+	}
+}
