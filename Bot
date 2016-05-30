@@ -1,0 +1,20 @@
+public class Bot {
+	SimpleWindowMod w;
+	Rectangle rec;
+	
+	public Bot(SimpleWindowMod w, Rectangle rec){
+		this.rec = rec;
+		this.w = w;
+	}
+	/**
+	 * 
+	 * @param by bollens y-värde
+	 */
+	public void move(int by){
+		int dy = rec.getY() - by;
+		if(dy != 0){
+			rec.move(0, dy > 0 ? -3 : 3);
+		}
+		rec.draw(w);
+	}
+}
