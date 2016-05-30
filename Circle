@@ -1,3 +1,6 @@
+ * 
+ * Klassen Circle är för att rita upp cirklar i SimpleWindowMod som har också metoder för att flytta på den och returnera x-, y-, radie värden.
+ */
 public class Circle {
 	SimpleWindowMod w;
 	int x, y, r;
@@ -15,6 +18,12 @@ public class Circle {
 
 	  }
 
+	  /**
+	   * 
+	   * @param w ett fönster att rita upp den i.
+	   * For loopen gör så att pennan går runt i en cirkel och ritar streck för streck. 
+	   * 
+	   */
 	  public void draw(SimpleWindowMod w) {
 		  w.setLineWidth(4);
 	    w.moveTo(x, y);
@@ -46,4 +55,3 @@ public class Circle {
 	    this.x = x;
 	  }
 	}
-
