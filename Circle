@@ -1,0 +1,49 @@
+public class Circle {
+	SimpleWindowMod w;
+	int x, y, r;
+
+	/**
+	 * 
+	 * @param x cirkelns x-värde
+	 * @param y cirkelns y-värde
+	 * @param r cirkelns radie
+	 */
+	  public Circle(int x, int y, int r) {
+	    this.x = x;
+	    this.y = y;
+	    this.r = r;
+
+	  }
+
+	  public void draw(SimpleWindowMod w) {
+		  w.setLineWidth(4);
+	    w.moveTo(x, y);
+	    for (int i = 0; i < 100; i++) {
+	      w.lineTo((int)(Math.cos(i) * r + x), (int)(Math.sin(i) * r + y));
+	      w.moveTo(x, y);
+	    }
+	    w.setLineWidth(1);
+	  }
+
+	  public int getY() {
+	    return y;
+	  }
+
+	  public int getR() {
+	    return r;
+	  }
+
+	  public int getX() {
+	    return x;
+	  }
+
+	  public void move(int mX, int mY){
+	    x = x + mX;
+	    y = y + mY;
+	  }
+
+	  public void setX(int x) {
+	    this.x = x;
+	  }
+	}
+
