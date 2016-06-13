@@ -79,9 +79,7 @@ public class GamePanel extends JPanel implements Runnable, KeyListener{
 		tileMap = new TileMap("src/files/testmap.txt", 32);
 		player = new Player(tileMap);
 		player.setx(50);
-		player.sety( 50);
-		System.out.println("Player X: " + player.getx() + " " + "Player Y: " + player.gety());
-		System.out.println("X: " + tileMap.getx() + "Y: " + tileMap.gety());
+		player.sety(50);
 	}
 	
 	///////////////////////////////////////////////////////////////////////////////////////////////
