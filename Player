@@ -208,7 +208,6 @@ public class Player {
 		int tx = tileMap.getx();
 		int ty = tileMap.gety();
 		
-		System.out.println("TileMap X: " + tx +  " " + "TileMap Y: " + ty);
 		
 		g.setColor(Color.RED);
 		g.fillRect((int) (tx + x - width) / 2, (int) (ty + y - height / 2), width, height);
