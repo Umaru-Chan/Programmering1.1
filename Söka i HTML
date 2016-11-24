@@ -1,1 +1,107 @@
+package Programmering2.uppg5;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+import java.util.ArrayList;
+
+import javax.swing.JButton;
+import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JPanel;
+import javax.swing.JTextField;
+
+public class Window extends JFrame {
+	
+	/**
+	 * Fields
+	 */
+	
+	private JPanel panel = new JPanel();
+	private JButton searchButton = new JButton("Sök");
+	private JTextField searchInput = new JTextField();
+	private String getSearched;
+	
+	private ArrayList<String> links = new ArrayList<String>();
+	
+	
+	
+	/**
+	 * startar applicationen
+	 */
+	public static void main(String[] args){
+		new Window();
+	}
+	
+	public Window(){
+		setSize(500, 500);
+        setResizable(false);
+        setDefaultCloseOperation(EXIT_ON_CLOSE);
+        panel.setLayout(null);
+        setContentPane(panel);
+        init();
+        setVisible(true);
+	}
+	
+	/**
+	 * Komponenter till fönstret
+	 */
+	private void init(){
+		searchInput.setBounds(5, 15, 150, 25);
+		panel.add(searchInput);
+		
+		searchButton.setBounds(160, 17, 50, 25);
+		searchButton.addActionListener(ae -> search());
+		panel.add(searchButton);
+		
+	}
+	
+	private void search(){
+		if(searchInput.getText().isEmpty()){
+			JOptionPane.showMessageDialog(rootPane, "Du måste söka på något lmao");
+		} else{
+			getSearched = searchInput.getText();
+		}
+		
+		showHTML("http://www.fredrika.se/");
+		links.clear();
+		
+		
+		
+	}
+	
+	private void showHTML(String webadress){
+		try{
+			URL url = new URL(webadress);
+			URLConnection conn = url.openConnection();
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			
+			String inputLine;
+			
+			while((inputLine = in.readLine()) != null){
+				if(inputLine.contains(getSearched)){
+					System.out.println(inputLine);
+					}
+				}
+			
+		
+		
+		}catch(MalformedURLException m){
+			System.out.println("MalformedURLException");
+			
+		}catch(IOException io){
+			System.out.println("IOException");
+			
+		}catch(RuntimeException r){
+			System.out.println("RuntimeException");
+			
+		}
+		
+	}
+
+}
 
