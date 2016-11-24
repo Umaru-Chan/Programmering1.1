@@ -1,0 +1,51 @@
+package Programmering2.uppg5;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.MalformedURLException;
+import java.net.URL;
+import java.net.URLConnection;
+
+public class urlTest {
+	private void showHTML(String webadress){
+		try{
+			URL url = new URL( webadress);
+			URLConnection conn = url.openConnection();
+			
+			BufferedReader in = new BufferedReader(new InputStreamReader(conn.getInputStream()));
+			
+			String inputLine;
+			
+			while( (inputLine = in.readLine()) != null){
+				if(inputLine.contains("<a href=")){
+					System.out.println(inputLine);
+				}else{
+
+				}
+			}
+		
+		
+		}catch(MalformedURLException m){
+			System.out.println("MalformedURLException");
+			
+		}catch(IOException io){
+			System.out.println("IOException");
+			
+		}catch(RuntimeException r){
+			System.out.println("RubtimeException");
+			
+		}
+		
+	}
+	
+	
+	
+	
+	
+	public static void main(String[] args){
+		urlTest test = new urlTest();
+		test.showHTML("http://www.fredrika.se/");
+	}
+
+}
